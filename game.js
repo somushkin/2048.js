@@ -81,7 +81,10 @@ function tableView() {
     for (let i = 0; i < rows.length; i++) {
         var cells = rows[i].cells;
         for (let j = 0; j < cells.length; j++) {
-            cells[j].innerText = table[i][j] ? table[i][j] : '';
+            var value = table[i][j] ? table[i][j] : '';
+            var opacity = value ? Math.log2(value) / 20 : 0;
+            cells[j].innerText = value;
+            cells[j].style.backgroundColor = "rgba(0, 0, 255, "+ opacity +")";
         }
     }
 }
@@ -163,7 +166,7 @@ function move(direction) {
             }
             break;
 
-            case 'down':
+        case 'down':
             for (let i = 0; i < size; i++) {
                 for (let j = size - 2; j >= 0; j--) {
                     if (!table[j][i]) {
